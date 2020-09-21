@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+
+h1 a {
+    font-size: 50px;
+    text-shadow:0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.11);
+}
+canvas {
+    width:500px;
+    height:500px;
+    background: #fff;
+    border-radius: 15px;
+	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.11);
+}
+
+/*btn*/
+.btn button {
+	cursor: pointer;
+	background: #fff;
+	padding: 10px 0px;
+	width: 80px;
+	border-radius: 5px;
+	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.11);
+	border: 2px solid rgba(0, 0, 0, 0.2);
+    margin:30px 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
+    font-size:15px;
+}
+
+
+/*colorPalette*/
+.colorPalette {
+    display: flex;
+    justify-content: center;
+}
+.colorPalette li {
+    width:40px;
+    height:40px;
+    margin:10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
