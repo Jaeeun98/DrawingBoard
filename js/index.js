@@ -11,11 +11,11 @@ const canvasSize = 500;
 let painting = false;
 let filling = false;
 
+//why?
 canvas.width = canvasSize;
 canvas.height = canvasSize;
 
 ctx.fillStyle = '#fff';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.strokeStyle = defaultColor;
 
 function stopPainting(){
@@ -48,19 +48,33 @@ function colorChange(event){
 //rangeChange
 function rangeChange(event){
     const rangeValue = event.target.value;
-    console.log(rangeValue);
     ctx.lineWidth = rangeValue;
 }
 
-
-if(canvas){
-    canvas.addEventListener('mousemove', onMouseMove);
-    canvas.addEventListener('mousedown', startPainting);
-    canvas.addEventListener('mouseup', stopPainting);
+//fillMode
+function fillTextMode(){
+    if(filling === true){
+        filling = false;
+        fillBtn.innerText = 'Fill'
+    } else {
+        filling = true;
+        fillBtn.innerText = 'Faint';
+    }
 }
+function canvasFill(){
+    if(filling){
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+ canvas.addEventListener('mousemove', onMouseMove);
+ canvas.addEventListener('mousedown', startPainting);
+ canvas.addEventListener('mouseup', stopPainting);
+ canvas.addEventListener('click', canvasFill);
+
 
 Array.from(colors).forEach(color =>
     color.addEventListener('click', colorChange)
 );
-
 range.addEventListener('input', rangeChange);
+fillBtn.addEventListener('click', fillTextMode);
