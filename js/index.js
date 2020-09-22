@@ -45,6 +45,13 @@ function colorChange(event){
     ctx.fillStyle = color;
 }
 
+//rangeChange
+function rangeChange(event){
+    const rangeValue = event.target.value;
+    console.log(rangeValue);
+    ctx.lineWidth = rangeValue;
+}
+
 
 if(canvas){
     canvas.addEventListener('mousemove', onMouseMove);
@@ -53,5 +60,7 @@ if(canvas){
 }
 
 Array.from(colors).forEach(color =>
-    color.addEventListener("click", colorChange)
+    color.addEventListener('click', colorChange)
 );
+
+range.addEventListener('input', rangeChange);
