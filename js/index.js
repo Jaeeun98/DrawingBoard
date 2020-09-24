@@ -67,11 +67,20 @@ function canvasFill(){
     }
 }
 
- canvas.addEventListener('mousemove', onMouseMove);
- canvas.addEventListener('mousedown', startPainting);
- canvas.addEventListener('mouseup', stopPainting);
- canvas.addEventListener('mouseleave', stopPainting);
- canvas.addEventListener('click', canvasFill);
+//save
+const saveClick = () => {
+    const imgURL = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.href = imgURL;
+    link.download = 'paintJS';
+    link.click();
+}
+
+canvas.addEventListener('mousemove', onMouseMove);
+canvas.addEventListener('mousedown', startPainting);
+canvas.addEventListener('mouseup', stopPainting);
+canvas.addEventListener('mouseleave', stopPainting);
+canvas.addEventListener('click', canvasFill);
 
 
 Array.from(colors).forEach(color =>
@@ -79,3 +88,4 @@ Array.from(colors).forEach(color =>
 );
 range.addEventListener('input', rangeChange);
 fillBtn.addEventListener('click', fillTextMode);
+saveBtn.addEventListener('click', saveClick);
