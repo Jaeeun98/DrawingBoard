@@ -3,30 +3,26 @@ const colors = document.querySelectorAll('.color');
 const range = document.querySelector('.rangeControls');
 const saveBtn = document.querySelector('saveBtn');
 const fillBtn = document.querySelector('.fillBtn');
+const resetBtn = document.querySelector('.resetBtn');
 const ctx = canvas.getContext('2d');
 
 // default
 const defaultColor = colors[0].style.background;
-const canvasSize = 500;
 let painting = false;
 let filling = false;
 
-//why?
-canvas.width = canvasSize;
-canvas.height = canvasSize;
+canvas.width = 500;
+canvas.height = 500;
 
 ctx.fillStyle = '#fff';
 ctx.strokeStyle = defaultColor;
 
-function stopPainting(){
-	painting = false;
-}
-function startPainting() {
-	painting = true;
-}
+//stop, start
+const stopPainting = () => painting = false;
+const startPainting = () => painting = true;
 
 //dwaring
-function onMouseMove(event){
+const onMouseMove = event =>{
     const x = event.offsetX;
     const y = event.offsetY;
     if(!painting) {
@@ -39,20 +35,20 @@ function onMouseMove(event){
 }
 
 //colorChange
-function colorChange(event){    
+const colorChange = event => {    
     const color = event.target.style.background;
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
 }
 
 //rangeChange
-function rangeChange(event){
+const rangeChange = event => {
     const rangeValue = event.target.value;
     ctx.lineWidth = rangeValue;
 }
 
 //fillMode
-function fillTextMode(){
+const fillText = () => {
     if(filling === true){
         filling = false;
         fillBtn.innerText = 'Fill'
@@ -61,20 +57,38 @@ function fillTextMode(){
         fillBtn.innerText = 'Faint';
     }
 }
-function canvasFill(){
+const canvasFill = () => {
     if(filling){
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 }
 
- canvas.addEventListener('mousemove', onMouseMove);
- canvas.addEventListener('mousedown', startPainting);
- canvas.addEventListener('mouseup', stopPainting);
- canvas.addEventListener('click', canvasFill);
+//save
+const saveClick = () => {
+    const imgURL = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.href = imgURL;
+    link.download = 'paintJS';
+    link.click();
+}
 
+//reset
+const resetclick = () => {
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+//addEvent
+canvas.addEventListener('mousemove', onMouseMove);
+canvas.addEventListener('mousedown', startPainting);
+canvas.addEventListener('mouseup', stopPainting);
+canvas.addEventListener('mouseleave', stopPainting);
+canvas.addEventListener('click', canvasFill);
 
 Array.from(colors).forEach(color =>
     color.addEventListener('click', colorChange)
 );
 range.addEventListener('input', rangeChange);
-fillBtn.addEventListener('click', fillTextMode);
+fillBtn.addEventListener('click', fillText);
+saveBtn.addEventListener('click', saveClick);
+resetBtn.addEventListener('click', resetclick);
