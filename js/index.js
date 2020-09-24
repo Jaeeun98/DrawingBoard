@@ -73,7 +73,7 @@ const saveClick = () => {
 }
 
 //reset
-const resetclick = () => {
+const resetClick = () => {
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -91,4 +91,4 @@ Array.from(colors).forEach(color =>
 range.addEventListener('input', rangeChange);
 fillBtn.addEventListener('click', fillText);
 saveBtn.addEventListener('click', saveClick);
-resetBtn.addEventListener('click', resetclick);
+resetBtn.addEventListener('click', resetClick);
